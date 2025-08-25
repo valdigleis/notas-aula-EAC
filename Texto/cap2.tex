@@ -612,7 +612,7 @@ Um terceiro tipo de relações binárias é o tipo irreflexivo, de um certo pont
 	Seja $\mathbb{N}_1 = \{x \in \mathbb{N} \mid x > 0\}$ tem-se que a relação $R$ definida sobre $\mathbb{N}_1$ como sendo $x \centernot{R} y \Longleftrightarrow y = 2x$ é irreflexiva.
 \end{exemplo}
 
-Seguindo com a tipagem das relações binárias,  a seguir este manuscrito irá apresentar os tipos: simétrico, assimétrico e anti-simétricos.
+Seguindo com a tipagem das relações binárias,  a seguir este documento irá apresentar os tipos: simétrico, assimétrico e anti-simétricos.
 
 \begin{definicao}[Tipo Simétrico]\label{def:RelacaoSimétrica}
 	Uma relação $R$ é dita ser simétrica quando para todo $x, y \in A$ se $x \mathrel{R} y$, então $y \mathrel{R} x$.
@@ -849,6 +849,132 @@ Por fim será agora apresentado o último tipo das relação binárias, sendo es
 	A relação ``$x$ é mãe de $y$'' definida sobre o conjunto de todas as pessoas (vivas e mortas) é uma relação intransitiva, pois se ``Maria é mãe de Julia'' e ``Julia é mãe de Rebeca'' tem-se que ``Maria não pode ser mãe de Rebeca''.
 \end{exemplo}
 
-O leitor atento pode notar que uma relação $R$ sobre um conjunto não vazio $A$ qualquer, será dita não ser intransitiva quando existir pelo menos três elementos $x, y, z \in A$ tal que $x \mathrel{R} y$ e $y \mathrel{R} z$ e $x \mathrel{R} z$.
+O leitor atento pode notar que uma relação $R$ sobre um conjunto não vazio $A$ qualquer, será dita não ser intransitiva quando existir pelo menos três elementos $x, y, z \in A$ tal que $x \mathrel{R} y$ e $y \mathrel{R} z$ e $x \centernot{R} z$.
+
+\section{Fecho das Relações Binárias}\label{sec:FechoDasRelacoesBinarias}
+
+Dado uma relação $R$ e uma propriedade $P$ não satisfeita por $R$,  pode-se questionar ``É possível fazer $R$ satisfazer  $P$?'', a resposta para essa pergunta é clara, \textbf{não}! Pois $R$, é uma estrutura matemática (uma relação) o que significa que é imutável\sidefootnote{Em matemática os objetos são imutáveis no sentido de que, eles são como são, desde o momento de sua ``criação'', ou seja, não existe liberdade para mudar de comportamento ou as propriedades dos elementos.}! O que se pode fazer neste caso, como explicando em \cite{judith2021}, é criar uma nova relação $R'$ que seja o fecho-$P$ de $R$, ou seja, essa nova relação é como uma cobertura que fecha $R$ com respeito a propriedade $P$. 
+
+A seguir, seguindo a ordem de apresentação vista em \cite{Gerard2021discreta}, este documento irá apresentar de forma direta como é possível fechar as relações com respeito as propriedades de reflexividade, simetria e transitividade, ou seja, serão definidos os ``algoritmos'' de fechamento para tais propriedades.
+
+\begin{definicao}[Fecho de uma relação]
+	Seja $R$ uma relação sobre $A$ e $P$ uma propriedade, a relação $\widehat{R}$ definida sobre $A$ é dita ser o fecho de $R$ com respeito a $P$ sempre que:
+	\begin{enumerate}
+		\item $\widehat{R}$ possui a propriedade $P$.
+		\item $R \subseteq \widehat{R}$.
+		\item Para toda relação $R^*$ que satisfaça as condições $(1)$ e $(2)$ tem-se que $\widehat{R} \subseteq R^*$. 
+	\end{enumerate}
+\end{definicao}
+
+Para fins de interesse de estudantes de computação e também para fins didáticos neste documento serão estudados os métodos de construção dos fechos para propriedades específicas, a saber, as propriedades de reflexividade, transitividade e simetria. 
+
+\begin{atencao}
+	Se $R$ já possui uma certa propriedade $P$, o fecho de $R$ com respeito a esta propriedade $P$ será exatamente o próprio $R$. Nesta situação é dito que $R$ é o ponto fixo de $R$ com respeito a $P$.
+\end{atencao}
+
+\begin{definicao}\label{def:FechoReflexivo}
+	Seja $R$ uma relação binária sobre $A$ o fecho reflexivo de $R$, denotado por $ref(R)$, corresponde a seguinte relação:
+	\begin{eqnarray*}
+		ref(R) = R \cup Id_A
+	\end{eqnarray*}
+\end{definicao}
+
+\begin{exemplo}
+	Seja $A = \{a, b, c\}$ e $R = \{(a, a), (a, b), (a, c), (c, a), (b, c)\}$ uma relação sobre $A$,  o fecho reflexivo desta relação é dado por:
+	\begin{eqnarray*}
+		ref(R)  & = & R \cup Id_A\\
+		& = & \{(a, a), (a, b), (a, c), (c, a), (b, c)\} \cup \{(a,a), (b, b), (c,c)\}\\
+		& = & \{(a, a), (a, b), (a, c), (c, a), (b, c), (b, b), (c,c)\}
+	\end{eqnarray*}
+\end{exemplo}
+
+\begin{exemplo}
+	Seja $B = \{0, 1\}$ e $K= \{(0, 0), (1, 0), (0, 1)\}$ uma relação sobre $B$,  o fecho reflexivo desta relação é dado por:
+	\begin{eqnarray*}
+		ref(K)  & = & R \cup Id_B\\
+		& = & \{(0, 0), (1, 0), (0, 1)\} \cup \{(0,0), (1, 1)\}\\
+		& = & \{(0, 0), (1, 0), (0, 1), (1, 1)\} 
+	\end{eqnarray*}
+\end{exemplo}
+
+\begin{exemplo}
+	Dado o conjunto $\mathbb{N}$ e a relação ``menor que'' definida nos números naturais corresponde ao conjunto, 
+	$$\{(x, y) \in \mathbb{N}^2 \mid (\exists z \in \mathbb{N}_*)[x = y + k]\}$$ 
+	e o fecho reflexivo para tal relação é exatamente a relação ``menor ou igual que'' e corresponde exatamente ao conjunto $\{(x, y) \in \mathbb{N}^2 \mid (\exists z \in \mathbb{N})[x = y + k]\}$.
+\end{exemplo}
+
+\begin{definicao}\label{def:FechoSimetrico}
+	Seja $R$ uma relação binária sobre $A$ o fecho simétrico de $R$, denotado por $sim(R)$, corresponde a seguinte relação:
+	\begin{eqnarray*}
+		sim(R) = R \cup \{(y, x) \mid (x, y) \in R\}
+	\end{eqnarray*}
+\end{definicao}
+
+\begin{exemplo}
+	Seja $A = \{a, b, c\}$ e $R = \{(a, a), (a, b), (a, c), (c, a), (b, c)\}$ uma relação sobre $A$,  o fecho reflexivo desta relação é dado por:
+	\begin{eqnarray*}
+		sim(R) & = &   R \cup \{(y, x) \mid (x, y) \in R\}\\
+		& = &  \{(a, a), (a, b), (a, c), (c, a), (b, c)\} \cup \{(a, a), (b, a), (c, a), (a, c), (c, b)\}\\
+		& = & \{(a, a), (a, b), (a, c), (c, a), (b, c), (b, a), (c, b)\}
+	\end{eqnarray*}
+\end{exemplo}
+
+\begin{exemplo}
+	Se $X$ é o conjunto dos humanos (vivos ou mortos) e $M$ é a relação ``pai de'', então $sim(M) = \{(x, y) \in X^2 \mid x \text{ é pai de } y \text{ ou } y \text{ é filho de } x\}$.
+\end{exemplo}
+
+
+O próximo fecho apresentado é chamado de fecho transitivo, de um ponto de vista de teoria dos grafos, é exibição direta da propriedade de caminho entre dois pontos $A$ e $B$, sem, entretanto, necessitar informar a existência dos pontos e caminhos intermediários que ligam $A$ e $B$.
+
+\begin{definicao}\label{def:FechoTransitivo}
+	Seja $R$ uma relação binária sobre $A$ o fecho transitivo de $R$, denotado por $R^+$, corresponde a seguinte relação:
+	\begin{eqnarray*}
+		R^+ = \bigcup_{i = 1}^\infty R_i
+	\end{eqnarray*}
+	em que, $R^1 = R$ e $R^{i+1} = R \bullet R^i$. Em particular, quando $A$ for um conjunto finito a igualdade acima pode ser reescrita como:
+	\begin{eqnarray*}
+		R^+ = \bigcup_{i = 1}^n R_i
+	\end{eqnarray*}
+\end{definicao}
+
+O fecho transitivo é especialmente importante para diversas áreas que são usualmente de interesse dos cientistas da computação tais como a teoria dos grafos, a lógica e teoria da complexidade. Particularmente o fecho transitivo aparece de forma recorrente nos algoritmos de banco de dados, como dito em \cite{Gerard2021discreta}, pois diversos bancos de dados são construídos desde a década de 70 de forma que seja sempre possível realizar a implementação de fechos transitivos.
+
+\begin{exemplo}
+	Para qualquer conjunto $A$ a relação binária $\subseteq$ definida sobre $\wp(A)$ é um clássico exemplo de relação cujo fecho transitivo é igual a ela mesmo.
+\end{exemplo}
+
+\begin{exemplo}
+	Dado o conjunto $B = \{0,1\}$ e a relação $T = \{(1, 0), (0, 1)\}$ definida sobre $B$ tem-se que o fecho transitivo de $T$ é dado por, 
+	\begin{eqnarray*}
+		T^+ & = & \bigcup_{i = 1}^2 T_i\\
+		& = & T_1 \cup T_2\\
+		& = & T \cup (T \bullet T_1)\\
+		& = & T \cup (T \bullet T)\\
+		& = &  \{(1, 0), (0, 1)\} \cup  \{(1, 0), (0, 1), (1, 1), (0, 0)\}\\
+		& = &  \{(1, 0), (0, 1), (1, 1), (0, 0)\}\\
+	\end{eqnarray*}
+\end{exemplo}
+
+\begin{exemplo}
+	Seja $A = \{1, 2, 3\}$ e $S =\{(1, 2), (2, 2), (3, 1), (2, 3)\}$ uma relação sobre $A$ o fecho transitivo de $R$ é exatamente o conjunto:
+	\begin{eqnarray*}
+		S^+ & = & \bigcup_{i = 1}^3 S_i\\
+		 & = & S_1 \cup S_2 \cup S_3\\
+		 & = & S \cup (S \bullet S_1) \cup (S \bullet S_2)\\
+		 & = & \{(1, 2), (2, 2), (3, 1), (2, 3), (1, 3), (1, 1), (3, 3)\}
+	\end{eqnarray*}
+\end{exemplo}
+
+\section{Relações e Grafos}\label{sec:RelacoesGrafos}
+
+{\color{red}Escrever depois...}
+
+\section{Questionário}\label{sec:Questionario3part1}
+
+{\color{red}Escrever depois...}
+
+
+
+
 
 
