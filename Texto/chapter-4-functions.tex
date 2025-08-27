@@ -738,7 +738,7 @@ A partir dos conceitos de composição de funções e de funções bijetoras, é
 	Seja $f \in B^A$ uma bijeção, uma função inversa de $f$ é qualquer função $g \in A^B$ tal que $g \circ f = id_{dom(f)}$ e $f \circ g = id_{ima(f)}$, ou seja, para todo $x \in dom(f), y \in ima(f)$ tem-se que $(g \circ f)(x) = x$ e $(f \circ g)(y) = y$.
 \end{definicao}
 
-Agora dado que toda bijeção $f$ é uma função total, as igualdades expressas na Definição \ref{def:FuncaoInversa} podem ser reescritas como sendo da forma $g \circ f = id_{A}$ e $f \circ g = id_{B}$.
+As igualdades expressas na Definição \ref{def:FuncaoInversa} podem ser reescritas como sendo da forma $g \circ f = id_{A}$ e $f \circ g = id_{B}$.
 
 \begin{atencao}
   Dado uma função $f \in B^A$, na literatura (ver \cite{lipschutz1978-TC, lipschutz2013-MD}) é comum usar $f^{-1}$ para se referir a função inversa de $f$. Além disso, como discutido em \cite{carmo2013} se $f \in B^A$ é uma bijeção sua inversa também será uma bijeção.
@@ -793,6 +793,20 @@ Agora dado que toda bijeção $f$ é uma função total, as igualdades expressas
 	\end{eqnarray*}
 	agora desde que $f^{-1} \in A^B$ e $g^{-1} \in B^C$, tem-se que $f^{-1} \circ g^{-1} \in A^C$ e assim pelo Teorema \ref{teo:NeutralidadeDaFuncaoIdentidade} tem-se que $id_A \circ (f^{-1} \circ g^{-1}) = f^{-1} \circ g^{-1}$, o que completa a prova.
 \end{prova}
+
+Usando a operação de composição é possível definir uma nova operação no espa das funções, chamada de operação potência, tal operação é formalmente definida a seguir.
+
+\begin{definicao}[Potência de uma função]\label{def:PotenciaFuncao}
+	Seja $n \in \mathbb{N}$ e  $f \in A^A$  é construída a potência $n$ de $f$, como sendo, a função $f^n \in A^A$, construída recursivamente para todo $x \in A$ como:
+	\begin{eqnarray}
+		f^0(x) & = & id_A(x)\\
+		f^{n+1}(x) & = & (f^n \circ f)(x)
+	\end{eqnarray}
+\end{definicao}
+
+Note que a definição \ref{def:PotenciaFuncao} permite deduzir que para qualquer que seja $n \in \mathbb{N} - \{0\}$, tem-se que, $f^{n+1} = \underbrace{f \circ \cdots \circ f}_{n-vezes}$.
+
+{\color{red} Continuar a escrita da potência depois, fazer exemplos e provar propriedades. . . }
 
 \section{Famílias}
 
