@@ -1,0 +1,44 @@
+% Teoria dos conjuntos
+\chapter{Álgebras Fundamentais}\label{cap:Semigroups}
+
+\epigraph{``-Na matemática, tudo são funções!''}{Autoria desconhecida.}
+
+\section{Semigrupos}\label{sec:basicSemigroups}
+
+Esta seção tem a difícil tarefa de abrir nosso estudo sobre estruturas algébricas, assim foi decidido começar pela mais básicas estrutura, a ideia de semigrupo.
+
+\begin{definicao}[Semigrupo]\label{def:Semigrupo}
+  Um semigrupo é uma estrutura $S = \langle A, \star \rangle$ onde $\star: A^2 \rightarrow A$ é uma função total, chamada de operação do semigrupo, satisfazendo a lei fundamental\sidefootnote{Em outras obras como \cite{joaoPavao2014} é usado o termo propriedade fundamental.}, para todo $x, y, z \in A$ tem-se que $x \star (y \star z) = (x \star y) \star z$\footnote{Em estruturas algébricas em geral utilizamos a notação infixa, em vez da notação prefixa, para as operações da lagebra}.
+\end{definicao}
+
+Do ponto de vista de álgebra enquanto linguagem, a totalidade da operação $\star$ em um semigrupo, pode ser visto como propriedade que garante a concatenação, ou seja, a possibilidade de forma palavra mais complexas tal como $x \star y \star z$, uma vez que, a totalidade garante que existe $k = y \star z$, e portanto, a palavra $x \star k$ é valida na linguagem descrita pelo semigrupo.
+
+Em particular sempre que o conjunto $A$ for finito, é dito que o semigrupo é finito, e essa finitude de $A$ permite que seja definido a noção de ordem do semigrupo.
+
+\begin{definicao}
+  Seja $S = \langle A, \star \rangle$ um semigrupo finito, a ordem de $S$ é exatamente $n$, onde $\# A = n$ com $n \in \mathbb{N}$.
+\end{definicao}
+
+\begin{table}
+  \centering
+  \begin{tabular}{c|c}
+    \hline
+    Cardinalidade de $A$ & Número de semigrupos sobre $A$\\
+    \hline
+    1 & 1\\
+    2 & 4\\
+    3 & 18\\
+    4 & 125\\
+    5 & 1160\\
+    $\vdots$ & $\vdots$\\
+    \hline
+  \end{tabular}
+  \caption{Relação entre número $n$ de elementos em um conjunto e o número de semigrupos de ordem $n$.}
+  \label{tab:OrdemElementosBasicosSemigrupo}
+\end{table}
+
+Uma conhecida relação definida sobre a cardinalidade de um conjunto e o número de semigrupos definidos sobre esse conjunto, ou seja, a relação de quantos semigrupos de ordem $n$ existe sobre um conjunto finito é apresentada (parcialmente) pela Tabela \ref{tab:OrdemElementosBasicosSemigrupo}.
+
+\begin{exemplo}
+  Para ilustrar considere o conjunto $A = \{0, 1\}$ obviamente $\# A = 3$, logo existem exatamente $4$ pares de elementos $x, y \in A$ para forma palavras da forma $x \star y$. Mas para cada par, existem apenas $2$ possibilidade de resultado (ou seja, de reescrita), assim o número total de formas possíveis para definir operações $\star$ nesse conjunto é exatamente $4^2 = 16$, mas nem todas as $16$ operações satisfazem a associatividade. Na verdade, apenas $5$ dessas operações são associativas\sidefootnote{Provar isso fica como exercício ao leitor}, ou seja, $5$ satisfazem a definição para forma semigrupos, porém, dessas $5$ definições, muitas são isomórficas (estruturalmente iguais), e desconsiderando isomorfismos, restam exatamente $4$ semigrupos distintos de ordem $2$. 
+\end{exemplo}
