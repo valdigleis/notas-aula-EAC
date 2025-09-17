@@ -1,44 +1,49 @@
 % Teoria dos conjuntos
-\chapter{Álgebras Fundamentais}\label{cap:Semigroups}
+\chapter{Introdução à Álgebra Universal}\label{cap:Semigroups}
 
-\epigraph{``-Na matemática, tudo são funções!''}{Autoria desconhecida.}
+\epigraph{``Na matemática, tudo são funções!''}{Autoria desconhecida.}
 
-\section{Semigrupos}\label{sec:basicSemigroups}
+\section{$\Sigma$-Álgebras}\label{sec:basicSemigroups}
 
-Esta seção tem a difícil tarefa de abrir nosso estudo sobre estruturas algébricas, assim foi decidido começar pela mais básicas estrutura, a ideia de semigrupo.
+A definição de álgebra que será apresentada mais adiante captura a noção das mais diferentes estruturas algébricas já muito bem conhecidas (e também as menos conhecidas) na literatura, de fato, a definição que será dada mais adiante é tão forte que cunhou todo o novo campo de estudo dentro da matemática, chamado de Álgebra Universal \cite{denecke2018}. Um ponto de destaque que vale ser mencionado é que, diversas pesquisas recentes em lógica \cite{plotkin2012, riche2005}, teoria de funções recursivas \cite{rajesh2025}, teoria de autômatos \cite{gorrieri2023}, linguagens de programação e especificações formais, revelaram que todas essas áreas podem tirar de fato muito proveito da ideia de Álgebra Universal.
 
-\begin{definicao}[Semigrupo]\label{def:Semigrupo}
-  Um semigrupo é uma estrutura $S = \langle A, \star \rangle$ onde $\star: A^2 \rightarrow A$ é uma função total, chamada de operação do semigrupo, satisfazendo a lei fundamental\sidefootnote{Em outras obras como \cite{joaoPavao2014} é usado o termo propriedade fundamental.}, para todo $x, y, z \in A$ tem-se que $x \star (y \star z) = (x \star y) \star z$\footnote{Em estruturas algébricas em geral utilizamos a notação infixa, em vez da notação prefixa, para as operações da lagebra}.
+Embora a definição de álgebra universal seja algo relativamente recente\sidefootnote{Remotando aproximadamente meados dos anos 30 com Birkhoff \cite{burris1981}.}, vários matemáticos do final do século 19 já especulavam por algo próximo de nossas ideias modernas, de fato, Whitehead em 1898, e mais tarde por Noether, argumentaram sobre formalizações similares. Antes de formalizar o conceito de o que seria uma álgebra é necessário formalizar algumas ferramentas antes.
+
+\begin{definicao}[$\Sigma$-assinatura]\label{def:SigmaAssinatura}
+  $\Sigma$ é um conjunto (possivelmente infinito) de símbolos e $arid: \Sigma \rightarrow \mathbb{N}$ é uma função total, uma $\Sigma$-assinatura é uma estrutura $\langle \Sigma, arid \rangle$.
 \end{definicao}
 
-Do ponto de vista de álgebra enquanto linguagem, a totalidade da operação $\star$ em um semigrupo, pode ser visto como propriedade que garante a concatenação, ou seja, a possibilidade de forma palavra mais complexas tal como $x \star y \star z$, uma vez que, a totalidade garante que existe $k = y \star z$, e portanto, a palavra $x \star k$ é valida na linguagem descrita pelo semigrupo.
+A função $arid$ retorna para todo $f \in \Sigma$ sua aridade, ou seja, a quantidade de argumentos que o símbolo $f$ necessita.
 
-Em particular sempre que o conjunto $A$ for finito, é dito que o semigrupo é finito, e essa finitude de $A$ permite que seja definido a noção de ordem do semigrupo.
-
-\begin{definicao}
-  Seja $S = \langle A, \star \rangle$ um semigrupo finito, a ordem de $S$ é exatamente $n$, onde $\# A = n$ com $n \in \mathbb{N}$.
+\begin{definicao}\label{def:SemanticaSigmaAlgebra}
+  Seja $A$ um conjunto não vazio, dado uma $\Sigma$-assinatura $\langle \Sigma, arid \rangle$, uma interpretação dos símbolos funcionais\sidefootnote{Em especial quando $n = 0$ tem-se que $A^0 = \{\emptyset\}$, e assim todo $f: A^0 \rightarrow A$ pode ser vista como uma função $f(\emptyset) = a$ com $a \in A$.} em $A$ é um conjunto da forma:
+  \begin{equation}
+    \Sigma_A = \{f \in \Sigma \mid arid(f) = n \land f: A^n \rightarrow A \text{ é uma função total}\}
+  \end{equation}
 \end{definicao}
 
-\begin{table}
-  \centering
-  \begin{tabular}{c|c}
-    \hline
-    Cardinalidade de $A$ & Número de semigrupos sobre $A$\\
-    \hline
-    1 & 1\\
-    2 & 4\\
-    3 & 18\\
-    4 & 125\\
-    5 & 1160\\
-    $\vdots$ & $\vdots$\\
-    \hline
-  \end{tabular}
-  \caption{Relação entre número $n$ de elementos em um conjunto e o número de semigrupos de ordem $n$.}
-  \label{tab:OrdemElementosBasicosSemigrupo}
-\end{table}
+\begin{exemplo}\label{exe:Algebra1}
+  Dado a $\Sigma$-assinatura  $\langle \{S, V\}, arid \rangle$ com $arid(S) = 1$ e $arid(V) = 2$. Agora para os conjuntos $\mathbb{N}$ e $\mathbb{Z}$ e $\mathbb{Q}$ tem-se as seguintes interpretações:
+  \begin{itemize}
+    \item[(a)] Para $\mathbb{N}$ tem-se $S(n) = n + 1$ e $V(m, n) = max(m, n)$.
+    \item[(b)] Para $\mathbb{Z}$ tem-se $S(n) = 1 - n $ e $V(m, n) = -2m + 3n$.
+    \item[(c)] Para $\mathbb{Q}$ tem-se $S\Big(\frac{m}{n}\Big) = m$ e $V$ não é interpretado em $\mathbb{Q}$.
+  \end{itemize}
+\end{exemplo}
 
-Uma conhecida relação definida sobre a cardinalidade de um conjunto e o número de semigrupos definidos sobre esse conjunto, ou seja, a relação de quantos semigrupos de ordem $n$ existe sobre um conjunto finito é apresentada (parcialmente) pela Tabela \ref{tab:OrdemElementosBasicosSemigrupo}.
+Para algum conjunto $A$, os símbolos funcionais de aridade zero na $\Sigma$-assinatura podem ser visto apenas como apelidos para os elementos em $A$, de fato, isso é algo interessante do ponto de vista de linguagem, pois uma vez que, todo elemento em $A$ é visto como uma função, tem-se (nesta visão) que os funcionais $n$-ários são então funções de alta ordem em que seu argumentos não são meros elementos de $A$, mas sim funções sobre $A$, o que volta para nossa epígrafe inícial ``\textbf{Na matemática, tudo são funções!}''.
+
+\begin{definicao}[$\Sigma$-álgebra]\label{def:SigmaAlgebra}
+  Uma $\Sigma$-álgebra é uma estrutura $\langle A, \mathcal{F} \rangle$ onde $\mathcal{F} \subseteq \Sigma_A$ é um conjunto finito e não vazio.
+\end{definicao}
+
+Uma vez que $\mathcal{F} = \{f_1, \cdots, f_n\}$ geral é estabelecido a convenção que $arid(f_1) \geq \cdots \geq arid(f_n)$, assim é dito que o tipo da $\Sigma$-álgebra é exatamente a sequência $(arid(f_n))_{i \in \{1, \cdots, n\}}$. E a partir dessa convenção é possível estabelecer uma ordem parcial sobre a classe de todas as $\Sigma$-álgebras como discutido em \cite{denecke2018}.
 
 \begin{exemplo}
-  Para ilustrar considere o conjunto $A = \{0, 1\}$ obviamente $\# A = 3$, logo existem exatamente $4$ pares de elementos $x, y \in A$ para forma palavras da forma $x \star y$. Mas para cada par, existem apenas $2$ possibilidade de resultado (ou seja, de reescrita), assim o número total de formas possíveis para definir operações $\star$ nesse conjunto é exatamente $4^2 = 16$, mas nem todas as $16$ operações satisfazem a associatividade. Na verdade, apenas $5$ dessas operações são associativas\sidefootnote{Provar isso fica como exercício ao leitor}, ou seja, $5$ satisfazem a definição para forma semigrupos, porém, dessas $5$ definições, muitas são isomórficas (estruturalmente iguais), e desconsiderando isomorfismos, restam exatamente $4$ semigrupos distintos de ordem $2$. 
+  Considere as $\Sigma$-álgebras formadas pelas interpretações apresentadas no Exemplo \ref{exe:Algebra1}, ou seja, as $\Sigma$-álgebras $\langle \mathbb{N}, \{V, S\} \rangle$, $\langle \mathbb{Z}, \{V, S\} \rangle$ e $\langle \mathbb{Q}, \{S\} \rangle$ tem-se que a primeira e a segunda são do tipo $(2, 1)$ e a última é do tipo $(1)$.
 \end{exemplo}
+
+\begin{atencao}
+  É comum como pode ser visto em \cite{burris1981, denecke2018, carmo2013} usar a notação sem as chaves do conjunto $\mathcal{F}$, ou seja, quando $\mathcal{F} = \{f_1, \cdots, f_n\}$ a escrita de uma $\Sigma$-álgebra é da forma $\langle A, f_1, \cdots, f_n \rangle$, em vez de, $\langle A, \{f_1, \cdots, f_n\} \rangle$.
+\end{atencao}
+
