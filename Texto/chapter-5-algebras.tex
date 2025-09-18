@@ -13,14 +13,16 @@ Embora a definição de álgebra universal seja algo relativamente recente\sidef
   $\Sigma$ é um conjunto (possivelmente infinito) de símbolos e $arid: \Sigma \rightarrow \mathbb{N}$ é uma função total, uma $\Sigma$-assinatura é uma estrutura $\langle \Sigma, arid \rangle$.
 \end{definicao}
 
-A função $arid$ retorna para todo $f \in \Sigma$ sua aridade, ou seja, a quantidade de argumentos que o símbolo $f$ necessita.
+A função $arid$ retorna para todo $f \in \Sigma$ sua aridade, ou seja, a quantidade de argumentos que o símbolo $f$ necessita. Em outras palavras, a $\Sigma$-assinatura descreve a sintaxe da linguagem, pois, por exemplo, pegando um $f \in \Sigma$ tal que $arid(f) = 3$, fica implícito a escrita de palavras da forma $f(x, y, z)$ onde $x, y$ e $z$ são também palavras da linguagem.
 
-\begin{definicao}\label{def:SemanticaSigmaAlgebra}
-  Seja $A$ um conjunto não vazio, dado uma $\Sigma$-assinatura $\langle \Sigma, arid \rangle$, uma interpretação dos símbolos funcionais\sidefootnote{Em especial quando $n = 0$ tem-se que $A^0 = \{\emptyset\}$, e assim todo $f: A^0 \rightarrow A$ pode ser vista como uma função $f(\emptyset) = a$ com $a \in A$.} em $A$ é um conjunto da forma:
+\begin{definicao}[$\Sigma$-semântica]\label{def:SemanticaSigmaAlgebra}
+  Seja $A$ um conjunto não vazio, dado uma $\Sigma$-assinatura $\langle \Sigma, arid \rangle$, a semântica dos símbolos funcionais\sidefootnote{Em especial quando $n = 0$ tem-se que $A^0 = \{\emptyset\}$, e assim todo $f: A^0 \rightarrow A$ pode ser vista como uma função $f(\emptyset) = a$ com $a \in A$.} em $A$ é um conjunto da forma:
   \begin{equation}
     \Sigma_A = \{f \in \Sigma \mid arid(f) = n \land f: A^n \rightarrow A \text{ é uma função total}\}
   \end{equation}
 \end{definicao}
+
+A Definição \ref{def:SemanticaSigmaAlgebra} apresenta a ideia de uma semântica associada de uma $\Sigma$-assinatura com respeito a um conjunto base $A$. Usando uma visão mecância pode-se ver esse conjunto base como sendo os dados usados por uma máquina e os símbolos funcionais são os programas compilados para serem executados pela máquina\sidefootnote{Do ponto de vista formal, pelo teorema da universalidade de Turing \cite{hopcroft2008} e pela tese de Chuch programas e máquinas são entendidas equivalentes \cite{benjaLivro2010}.}. E através dessa visão, podemos arguementar que nem todo símbolo funcional poderá ser interpretado no conjunto base, ou seja, nem todo programa poderá ser compilado  para ser executado pela máquina.
 
 \begin{exemplo}\label{exe:Algebra1}
   Dado a $\Sigma$-assinatura  $\langle \{S, V\}, arid \rangle$ com $arid(S) = 1$ e $arid(V) = 2$. Agora para os conjuntos $\mathbb{N}$ e $\mathbb{Z}$ e $\mathbb{Q}$ tem-se as seguintes interpretações:
